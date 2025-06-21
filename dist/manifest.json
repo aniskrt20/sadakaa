@@ -1,0 +1,90 @@
+
+{
+  "id": "/?source=pwa",
+  "name": "صدقة جارية",
+  "short_name": "صدقة",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#27ae60",
+  "orientation": "portrait",
+  "description": "تطبيق صدقة جارية: أذكار، أدعية، مواقيت الصلاة، تنبيهات ذكية، يعمل بدون إنترنت. هدفنا تسهيل العبادة اليومية للمسلمين.",
+  "lang": "ar",
+  "dir": "rtl",
+  "prefer_related_applications": false,
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.example.sadaqa",
+      "id": "com.example.sadaqa"
+    }
+  ],
+  "categories": ["lifestyle", "education", "utilities", "religion", "productivity"],
+  "icons": [
+    {
+      "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/lovable-uploads/3c56f050-d3fc-4392-8798-d62c0d3393af.png",
+      "sizes": "640x1353",
+      "type": "image/png"
+    },
+    {
+      "src": "/lovable-uploads/b87cc5a2-402e-47a5-8e17-ea48c390b002.png",
+      "sizes": "1080x2160",
+      "type": "image/png"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "مواقيت الصلاة",
+      "short_name": "الصلاة",
+      "description": "عرض مواقيت الصلاة",
+      "url": "/",
+      "icons": [{ "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "الوِرد اليومي",
+      "short_name": "الأذكار",
+      "description": "الوصول للأذكار بسرعة",
+      "url": "/adhkar",
+      "icons": [{ "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "القرآن الكريم",
+      "short_name": "القرآن",
+      "description": "قراءة واستماع للقرآن كاملًا",
+      "url": "/quran",
+      "icons": [{ "src": "/lovable-uploads/e28c9759-fede-434b-bb05-27c249e13798.png", "sizes": "192x192" }]
+    }
+  ],
+  "launch_handler": { "client_mode": "navigate-existing" },
+  "scope_extensions": [
+    { "origin": "https://example.com" }
+  ],
+  "iarc_rating_id": "pending-value"
+}
