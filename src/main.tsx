@@ -2,6 +2,7 @@ import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import './index.css'
 import { mobileService } from './services/mobile-service'
+import { storagePermissionService } from './services/storage-permission-service'
 
 // تهيئة خدمات التطبيق المحمول
 if (mobileService.isNativePlatform()) {
@@ -34,6 +35,9 @@ if ('serviceWorker' in navigator) {
       // تهيئة خدمات الإشعارات المحسنة
       const { enhancedNotificationService } = await import('./services/enhanced-notification-service');
       await enhancedNotificationService.startAllServices();
+      
+      // تهيئة خدمة صلاحيات التخزين
+      await storagePermissionService.setupStorageMonitoring();
       
       console.log('All enhanced services initialized successfully');
       
@@ -145,4 +149,4 @@ window.addEventListener('appinstalled', () => {
 // تشغيل التطبيق
 createRoot(document.getElementById("root")!).render(<App />);
 
-console.log('Sadaqa Jariya App v1.2.0 - Enhanced PWA initialized');
+console.log('Sadaqa Jariya App v1.2.0 - Enhanced PWA with Storage Permissions initialized');

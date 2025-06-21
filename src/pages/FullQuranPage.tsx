@@ -1,23 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useQuranData } from "@/services/api/quranCloudApi";
 import BottomNavigation from "@/components/BottomNavigation";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Pagination, PaginationContent, PaginationItem, PaginationLink } from "@/components/ui/pagination";
-import { ChevronRight, Search, BookOpen, Star, Sparkles, Volume2, Heart, Download } from "lucide-react";
+import { ChevronRight, Search, BookOpen, Star, Sparkles, Volume2, Heart, Download, Shield } from "lucide-react";
 import { useNavigate, Link } from "react-router-dom";
 import { useToast } from "@/components/ui/use-toast";
 import { Button } from "@/components/ui/button";
 import OfflineDownloadManager from "@/components/quran/OfflineDownloadManager";
+import StoragePermissionDialog from "@/components/storage/StoragePermissionDialog";
+import { storagePermissionService } from "@/services/storage-permission-service";
 
 const FullQuranPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const [downloadManagerOpen, setDownloadManagerOpen] = useState(false);
+  const [storagePermissionOpen, setStoragePermissionOpen] = useState(false);
+  const [showStorageInfo, setShowStorageInfo] = useState(false);
   const { data: quranData, isLoading, error } = useQuranData();
   const { toast } = useToast();
   const navigate = useNavigate();
   const itemsPerPage = 12;
+
+  useEffect(() => {
+    // التحقق من دعم Storage API عند تحميل الصفحة
+    const checkStorageSupport = async () => {
+      const isSupported = storagePermissionService.isStorageAPISupported();
+      if (isSupported) {
+        const status = await storagePermissionService.getStoragePermissionStatus();
+        setShowStorageInfo(true);
+        
+        // إظهار تحذير إذا لم يتم منح صلاحيات التخزين المستمر
+        if (!status.persistent && !localStorage.getItem('storage-warning-shown')) {
+          setTimeout(() => {
+            toast({
+              title: "تحسين التخزين",
+              description: "لضمان عدم فقدان البيانات المحملة، يُنصح بمنح صلاحيات التخزين المستمر",
+              duration: 5000,
+            });
+            localStorage.setItem('storage-warning-shown', 'true');
+          }, 2000);
+        }
+      }
+    };
+    
+    checkStorageSupport();
+  }, [toast]);
 
   const handleSurahClick = (surahNumber: number) => {
     toast({
@@ -25,6 +54,19 @@ const FullQuranPage = () => {
       description: "جاري فتح السورة",
     });
     navigate(`/quran/surah/${surahNumber}`);
+  };
+
+  const handleDownloadManagerOpen = async () => {
+    // التحقق من صلاحيات التخزين قبل فتح مدير التحميل
+    const status = await storagePermissionService.getStoragePermissionStatus();
+    
+    if (!status.persistent && storagePermissionService.isStorageAPISupported()) {
+      // إظهار نافذة طلب الصلاحيات أولاً
+      setStoragePermissionOpen(true);
+    } else {
+      // فتح مدير التحميل مباشرة
+      setDownloadManagerOpen(true);
+    }
   };
 
   let filteredSurahs = [];
@@ -170,14 +212,28 @@ const FullQuranPage = () => {
                 </div>
               </div>
               
-              {/* زر التحميل للاستخدام بدون اتصال */}
-              <Button
-                onClick={() => setDownloadManagerOpen(true)}
-                className="rounded-xl px-6 py-4 font-medium transition-all duration-300 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg hover:shadow-xl hover:scale-105"
-              >
-                <Download size={20} className="ml-2" />
-                تحميل للاستخدام بدون اتصال
-              </Button>
+              <div className="flex gap-3">
+                {/* زر إدارة صلاحيات التخزين */}
+                {showStorageInfo && (
+                  <Button
+                    onClick={() => setStoragePermissionOpen(true)}
+                    variant="outline"
+                    className="rounded-xl px-4 py-4 font-medium transition-all duration-300 border-orange-300 text-orange-600 hover:bg-orange-50"
+                  >
+                    <Shield size={20} className="ml-2" />
+                    صلاحيات التخزين
+                  </Button>
+                )}
+                
+                {/* زر التحميل للاستخدام بدون اتصال */}
+                <Button
+                  onClick={handleDownloadManagerOpen}
+                  className="rounded-xl px-6 py-4 font-medium transition-all duration-300 bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white border-0 shadow-lg hover:shadow-xl hover:scale-105"
+                >
+                  <Download size={20} className="ml-2" />
+                  تحميل للاستخدام بدون اتصال
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -284,6 +340,17 @@ const FullQuranPage = () => {
       <OfflineDownloadManager 
         open={downloadManagerOpen}
         onOpenChange={setDownloadManagerOpen}
+      />
+      
+      {/* نافذة صلاحيات التخزين */}
+      <StoragePermissionDialog
+        open={storagePermissionOpen}
+        onOpenChange={setStoragePermissionOpen}
+        onPermissionGranted={() => {
+          setStoragePermissionOpen(false);
+          // فتح مدير التحميل بعد منح الصلاحيات
+          setDownloadManagerOpen(true);
+        }}
       />
       
       <div className="pb-20">
