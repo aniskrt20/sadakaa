@@ -1,0 +1,417 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Cairo:wght@400;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+  :root {
+    --background: 36 30% 96%;
+    --foreground: 20 14.3% 4.1%;
+
+    --card: 36 25% 98%;
+    --card-foreground: 20 14.3% 4.1%;
+
+    --popover: 36 25% 98%;
+    --popover-foreground: 20 14.3% 4.1%;
+
+    --primary: 142 100% 22%;
+    --primary-foreground: 36 25% 98%;
+
+    --secondary: 41 50% 60%;
+    --secondary-foreground: 20 14.3% 4.1%;
+
+    --muted: 35 20% 96%;
+    --muted-foreground: 240 3.8% 46.1%;
+
+    --accent: 41 50% 60%;
+    --accent-foreground: 20 14.3% 4.1%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 35 30% 90%;
+    --input: 35 30% 90%;
+    --ring: 142 100% 22%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 36 30% 98%;
+    --sidebar-foreground: 20 14.3% 4.1%;
+    --sidebar-primary: 142 100% 22%;
+    --sidebar-primary-foreground: 36 25% 98%;
+    --sidebar-accent: 41 50% 60%;
+    --sidebar-accent-foreground: 20 14.3% 4.1%;
+    --sidebar-border: 35 30% 90%;
+    --sidebar-ring: 142 100% 22%;
+  }
+
+  .dark {
+    --background: 20 14.3% 5%;
+    --foreground: 36 25% 92%;
+
+    --card: 20 14.3% 7%;
+    --card-foreground: 36 25% 92%;
+
+    --popover: 20 14.3% 7%;
+    --popover-foreground: 36 25% 92%;
+
+    --primary: 142 70% 25%;
+    --primary-foreground: 36 25% 92%;
+
+    --secondary: 41 45% 55%;
+    --secondary-foreground: 20 14.3% 7%;
+
+    --muted: 20 14.3% 15%;
+    --muted-foreground: 36 25% 65%;
+
+    --accent: 41 45% 55%;
+    --accent-foreground: 20 14.3% 7%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 36 25% 92%;
+
+    --border: 20 14.3% 14%;
+    --input: 20 14.3% 14%;
+    --ring: 142 70% 25%;
+    
+    --sidebar-background: 20 14.3% 5%;
+    --sidebar-foreground: 36 25% 92%;
+    --sidebar-primary: 142 70% 25%;
+    --sidebar-primary-foreground: 36 25% 92%;
+    --sidebar-accent: 41 45% 55%;
+    --sidebar-accent-foreground: 20 14.3% 7%;
+    --sidebar-border: 20 14.3% 14%;
+    --sidebar-ring: 142 70% 25%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Poppins', 'Cairo', 'Segoe UI', sans-serif;
+  }
+}
+
+/* Enhanced Modern Animations */
+@keyframes float {
+  0%, 100% { 
+    transform: translateY(0px) rotate(0deg); 
+  }
+  33% { 
+    transform: translateY(-10px) rotate(1deg); 
+  }
+  66% { 
+    transform: translateY(-5px) rotate(-1deg); 
+  }
+}
+
+@keyframes gentle-bounce {
+  0%, 100% { 
+    transform: translateY(0px) scale(1); 
+  }
+  50% { 
+    transform: translateY(-10px) scale(1.05); 
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-in-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in-scale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% { 
+    background-position: -200% 0; 
+  }
+  100% { 
+    background-position: 200% 0; 
+  }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { 
+    box-shadow: 0 0 20px rgba(59, 130, 246, 0.3); 
+  }
+  50% { 
+    box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 40px rgba(59, 130, 246, 0.4); 
+  }
+}
+
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Animation Classes */
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-gentle-bounce {
+  animation: gentle-bounce 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.6s ease-out forwards;
+}
+
+.animate-slide-in-right {
+  animation: slide-in-right 0.6s ease-out forwards;
+}
+
+.animate-fade-in-scale {
+  animation: fade-in-scale 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+.animate-glow-pulse {
+  animation: glow-pulse 2s ease-in-out infinite;
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Staggered Animation Delays */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+@layer components {
+  /* Enhanced Arabic and Islamic styling */
+  .arabic-text {
+    font-family: 'Amiri', 'Traditional Arabic', 'Scheherazade', serif;
+    direction: rtl;
+    line-height: 1.8;
+  }
+
+  .islamic-gradient {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  }
+
+  .islamic-gradient-gold {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  }
+
+  .islamic-gradient-light {
+    background: linear-gradient(135deg, rgba(5, 150, 105, 0.1) 0%, rgba(4, 120, 87, 0.1) 100%);
+  }
+
+  .teal-gradient {
+    background: linear-gradient(135deg, #0891b2 0%, #0e7490 100%);
+  }
+
+  .gold-gradient {
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+  }
+
+  /* Enhanced Glass Effect */
+  .glass-card {
+    backdrop-filter: blur(25px);
+    background: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Enhanced Islamic Elements */
+  .islamic-card {
+    @apply relative overflow-hidden rounded-3xl transition-all duration-500;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .islamic-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Enhanced Header Styling */
+  .islamic-header {
+    @apply relative overflow-hidden rounded-3xl;
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    backdrop-filter: blur(20px);
+  }
+
+  .islamic-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    animation: shimmer 3s infinite;
+  }
+
+  /* Enhanced Interactive Elements */
+  .hover-scale {
+    @apply transition-transform duration-300 hover:scale-105;
+  }
+
+  .hover-lift {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  .interactive-glow {
+    @apply transition-all duration-300;
+  }
+
+  .interactive-glow:hover {
+    filter: drop-shadow(0 10px 20px rgba(59, 130, 246, 0.3));
+  }
+}
+
+@layer utilities {
+  /* Enhanced Shadow Effects */
+  .shadow-glow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(59, 130, 246, 0.1);
+  }
+
+  .shadow-glow-emerald {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1), 0 0 20px rgba(5, 150, 105, 0.2);
+  }
+
+  .text-glow {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+
+  .backdrop-blur-strong {
+    backdrop-filter: blur(25px);
+  }
+}
+
+/* Enhanced Responsive Design */
+@media (max-width: 768px) {
+  .glass-card {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.9);
+  }
+  
+  .animate-float {
+    animation-duration: 8s;
+  }
+
+  .arabic-text {
+    font-size: 0.95em;
+    line-height: 1.7;
+  }
+}
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ثيم أخضر المدينة */
+.theme-medina-green {
+  --background: 154 60% 98%;
+  --foreground: 154 30% 15%;
+  --primary: 154 74% 20%;
+  --primary-foreground: 154 60% 98%;
+  --card: 154 45% 97%;
+  --card-foreground: 154 30% 10%;
+  --accent: 46 35% 70%;
+  --accent-foreground: 154 30% 10%;
+  --muted: 154 30% 95%;
+  --muted-foreground: 154 20% 40%;
+  --border: 154 40% 85%;
+  --input: 154 38% 85%;
+}
+
+/* ثيم القبّة الذهبية */
+.theme-dome-gold {
+  --background: 47 57% 96%;
+  --foreground: 47 50% 16%;
+  --primary: 47 55% 38%;
+  --primary-foreground: 47 55% 96%;
+  --card: 47 55% 98%;
+  --card-foreground: 47 50% 10%;
+  --accent: 47 57% 46%;
+  --accent-foreground: 47 50% 10%;
+  --muted: 47 60% 93%;
+  --muted-foreground: 47 33% 45%;
+  --border: 47 55% 70%;
+  --input: 47 35% 92%;
+}
+
+/* ثيم الكعبة الأسود */
+.theme-kaaba-black {
+  --background: 52 10% 10%;
+  --foreground: 52 100% 89%;
+  --primary: 52 100% 51%;
+  --primary-foreground: 0 0% 0%;
+  --card: 52 8% 13%;
+  --card-foreground: 52 100% 82%;
+  --accent: 47 85% 44%;
+  --accent-foreground: 0 0% 0%;
+  --muted: 52 10% 20%;
+  --muted-foreground: 52 100% 78%;
+  --border: 47 85% 44%;
+  --input: 47 85% 44%;
+}
